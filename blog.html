@@ -1,0 +1,27 @@
+<head>
+  <title>Chris's Great Meteor Blog Engine</title>
+</head>
+
+<body>
+    {{>nav}}
+    {{#if currentUser}}
+        {{>admin}}
+    {{/if}}
+    {{>blog}}
+</body>
+
+<template name="nav">
+    {{loginButtons}}
+</template>
+
+<template name="blog">
+    <section id="blog-posts">
+        {{>blogPosts}}
+    </section>
+</template>
+
+<template name="admin">
+    {{>postAdd}}
+</template>
+
+

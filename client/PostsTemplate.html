@@ -1,0 +1,103 @@
+<template name="blogPosts">
+    <div id="posts-wrapper">
+        {{#each posts}}
+            {{> blogPost}}
+        {{/each}}
+    </div>
+</template>
+
+<template name="blogPost">
+    <div class="post" data-post-id="{{post._id}}">
+        <h1 class="post-title editable" contenteditable="{{isLoggedIn}}" data-key="title">
+            {{post.title}}
+        </h1>
+        <div class="post-body editable" contenteditable="{{isLoggedIn}}" data-key="body">
+            {{raw post.body}}
+        </div>
+        <div class="post-meta">
+            <span class="author-name">
+                {{post.authorName}}
+            </span>
+            <span class="post-date">
+                {{post.date}}
+            </span>
+        </div>
+        <div class="post-comments">
+            {{#each post.comments}}
+                {{>postComment}}
+            {{/each}}
+        </div>
+        <button class="btn btn-primary comment-add">
+            Add Comment
+        </button>
+    </div>
+</template>
+
+<template name="postAdd">
+    <div id="post-add-wrapper">
+        {{#if currentUser}}
+        {{>postChangeTitle}}
+        {{>postChangeBody}}
+        <button id="post-create-new">
+            Add Post
+        </button>
+        {{/if}}
+    </div>
+</template>
+
+<template name="postChangeTitle">
+    <label for="post-title-input">
+        Post Title
+    </label>
+    <input type="text" id="post-title-input" value="{{post.title}}"/>
+</template>
+
+<template name="postChangeBody">
+    <label for="post-body-input">
+        Post Body
+    </label>
+    <textarea id="post-body-input">
+        {{post.body}}
+    </textarea>
+</template>
+
+<template name="postCommentRemove">
+    <span class="comment-remove-button">
+        remove comment
+    </span>
+</template>
+
+
+<template name="postComment">
+    <div class="comment">
+        <span class="commenter-name">
+            {{comment.commenterName}}
+        </span>
+        <span class="comment-date">
+            {{comment.date}}
+        </span>
+        <p class="comment-body">
+            {{comment.body}}
+        </p>
+        {{#if currentUser}}
+            {{>postCommentRemove}}
+        {{/if}}
+    </div>
+</template>
+
+<template name="commentAdd">
+    <div class="post-leave-comment">
+        <label for="comment-author-name">Name:</label>
+        <input id="comment-author-name" type="text" value="Chris Tester"/>
+
+        <label for="comment-author-email">Email:</label>
+        <input id="comment-author-email" type="email" value="christester@chris.com"/>
+
+        <label for="comment-body">Comment:</label>
+        <textarea id="comment-body">
+            Here is a great test comment
+        </textarea>
+
+        <button type="submit" class="btn comment-publish">Comment</button>
+    </div>
+</template>
