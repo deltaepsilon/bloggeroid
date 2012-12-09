@@ -6,6 +6,7 @@ selectors =
   commentAuthorName: '#comment-author-name'
   commentAuthorEmail: '#comment-author-email'
   commentBody: '#comment-body'
+  commentPublish: '#comment-publish'
   postAddWrapper: '#post-add-wrapper'
   postAddTitle: '#post-title-input'
   postAddBody: '#post-body-input'
@@ -35,7 +36,9 @@ Template.blogPost.events(
 
   'click .comment-add': (e) ->
     post = $(e.target).parent(selectors.post)
-    post.append Template.commentAdd
+    console.log post.find(selectors.commentPublish)
+    if (!post.find(selectors.commentPublish))
+      post.append Template.commentAdd
 
   'blur [contenteditable="true"]': (e) ->
     target = $(e.target)
@@ -57,4 +60,3 @@ Template.postAdd.events(
       postAddWrapper.find(selectors.postAddBody).val(),
       true
 )
-

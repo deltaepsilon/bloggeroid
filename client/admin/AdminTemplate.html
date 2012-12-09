@@ -1,0 +1,39 @@
+<template name="postAdd">
+    <div id="post-add-wrapper">
+        {{#if currentUser}}
+        {{>postChangeTitle}}
+        {{>postChangeBody}}
+        <button id="post-create-new">
+            Add Post
+        </button>
+        {{/if}}
+    </div>
+</template>
+
+<template name="postChangeTitle">
+    <label for="post-title-input">
+        Post Title
+    </label>
+    <input type="text" id="post-title-input" value="{{post.title}}"/>
+</template>
+
+<template name="postChangeBody">
+    <label for="post-body-input">
+        Post Body
+    </label>
+    <textarea id="post-body-input">
+        {{post.body}}
+    </textarea>
+</template>
+
+<template name="postCommentRemove">
+    <span class="comment-remove-button">
+        remove comment
+    </span>
+</template>
+
+<template name="assetUpload">
+    <div id="asset-upload-dropzone" class="dropzone">
+        Drag and drop files in this zone to save them out.
+    </div>
+</template>
