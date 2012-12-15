@@ -15,8 +15,6 @@ Template.blogPosts.posts = ->
   return Posts.find({active: true})
 
 Template.blogPost.post = ->
-  date = new Date(this.date)
-  this.date = date.toLocaleDateString()
   return this
 
 Template.postComment.comment = ->
@@ -27,7 +25,6 @@ Template.postComment.comment = ->
 Template.blogPost.events(
   'click .comment-publish': (e) ->
     commentWrapper = $(e.target).parent(selectors.postLeaveComment)
-    console.log commentWrapper.parent(selectors.post).attr 'data-post-id'
     Meteor.call 'addComment',
       commentWrapper.find(selectors.commentAuthorName).val(),
       commentWrapper.find(selectors.commentAuthorEmail).val(),
@@ -36,7 +33,6 @@ Template.blogPost.events(
 
   'click .comment-add': (e) ->
     post = $(e.target).parent(selectors.post)
-    console.log post.find(selectors.commentPublish)
     if (!post.find(selectors.commentPublish))
       post.append Template.commentAdd
 
@@ -54,7 +50,6 @@ Template.blogPost.events(
 Template.postAdd.events(
   'click #post-create-new': (e) ->
     postAddWrapper = $(e.target).parent(selectors.postAddWrapper)
-    console.log postAddWrapper.find(selectors.postAddTitle).val(), postAddWrapper.find(selectors.postAddBody).val()
     Meteor.call 'createPost',
       postAddWrapper.find(selectors.postAddTitle).val(),
       postAddWrapper.find(selectors.postAddBody).val(),

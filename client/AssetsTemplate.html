@@ -1,0 +1,49 @@
+<template name="assetUpload">
+    <div id="asset-upload-dropzone" class="dropzone">
+        Drag and drop files in this zone to save them out.
+    </div>
+</template>
+
+<template name="assetsList">
+    <ul id="assets-list">
+        {{#each assets}}
+            {{> assetDescription}}
+        {{/each}}
+    </ul>
+</template>
+
+<template name="assetDescription">
+    <li id="{{asset._id}}" class="asset">
+        <button class="asset-remove">Delete Asset</button>
+        <span class="asset-date">
+            {{formattedDate asset.date}}
+        </span>
+        <span class="asset-title">
+            {{asset.title}}
+        </span>
+        <span class="asset-size">
+            {{asset.size}}
+        </span>
+        <span class="asset-type">
+            {{asset.type}}
+        </span>
+        <span class="asset-uri">
+            {{asset.uri}}
+        </span>
+        {{#if isImage asset.type}}
+            <img class="asset-image" src="{{asset.uri}}"/>
+        {{else}}
+            {{#if isVideo asset.type}}
+                <video class="asset-video" width="100" controls="">
+                    <source type="{{asset.type}}" src="{{asset.uri}}">
+                </video>
+            {{else}}
+                {{#if isAudio asset.type}}
+                    <audio class="asset-audio">
+                        <source type={{asset.type}} src="{{asset.uri}}">
+                    </audio>
+                {{/if}}
+            {{/if}}
+        {{/if}}
+    </li>
+</template>
