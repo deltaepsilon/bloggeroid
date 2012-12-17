@@ -37,16 +37,17 @@ Posts.allow(
 Meteor.methods(
   createPost: (title, body, active) ->
     if !(title || body || active)
-      throw new Meteor.Error 400, 'Required parameter missing'
+      return (throw new Meteor.Error 400, 'Required parameter missing')
     if typeof title != 'string'
-      throw new Meteor.Error 413, 'Title is not a string'
+      return (throw new Meteor.Error 413, 'Title is not a string')
     if typeof body != 'string'
-      throw new Meteor.Error 413, 'Body is not a string'
+      return (throw new Meteor.Error 413, 'Body is not a string')
     if typeof active != 'boolean'
-      throw new Meteor.Error 413, 'Active is not a boolean'
-    if !this.userId
-      throw new Meteor.Error 403, 'You have to be logged in to post anything. Sorry Charlie.'
+      return (throw new Meteor.Error 413, 'Active is not a boolean')
+
     user = Meteor.user()
+    if !this.userId || !user
+      return (throw new Meteor.Error 403, 'You have to be logged in to post anything. Sorry Charlie.');
 
     return Posts.insert(
       date: new Date()
@@ -66,7 +67,6 @@ Meteor.methods(
       throw new Meteor.Error 403, 'You have to be logged in to post anything. Sorry Charlie.'
     updateSet = {}
     updateSet[dataKey] = content
-    console.log 'content', content
     Posts.update postId,
       $set:
         updateSet

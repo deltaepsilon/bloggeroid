@@ -13,7 +13,7 @@
 Assets = new Meteor.Collection "assets"
 
 Assets.allow(
-  insert: (asset) ->
+  insert: () ->
     return false;
   update: (asset) ->
     if this.userId != asset.authorId

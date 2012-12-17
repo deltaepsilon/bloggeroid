@@ -11,8 +11,9 @@ Meteor.publish 'posts', ->
   )
 
 Meteor.startup ->
+  console.log 'starting up'
   if Posts.find().count() == 0
-    Meteor.call 'createPost',
-    'First Post',
-    'This is a post body text field',
-    true
+    console.log 'empty'
+    Meteor.call 'createPost', 'First Post', 'This is a post body text field', true, (error) ->
+      if error
+        console.warn 'error: ', error

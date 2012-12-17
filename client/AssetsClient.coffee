@@ -13,13 +13,11 @@ Template.assetDescription.events(
   'click .asset-remove': (e) ->
     target = $(e.target)
     id = target.parent(selectors.asset).attr('id')
-    console.log 'assetDescription Remove', id
-    Assets.remove(id)
     Meteor.call 'removeAsset', id, (error) ->
-      console.log 'client side error', error
       if error
-        console.log 'error 1'
-#        throw new Meteor.Error(500, 'Failed to remove file', error)
+        console.warn 'error: ', error
+      else
+        Assets.remove(id)
 )
 
 Template.assetUpload.events(
@@ -49,7 +47,7 @@ class AssetUpload
 
   uploadFile: (file) ->
     reader = new FileReader()
-    reader.onload = (progress) =>
+    reader.onload = (e) =>
       @sendToServer file, reader
     reader.readAsDataURL file
 
