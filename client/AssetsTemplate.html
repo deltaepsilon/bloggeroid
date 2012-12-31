@@ -28,19 +28,19 @@
             {{asset.type}}
         </span>
         <span class="asset-uri">
-            {{asset.uri}}
+            {{asset.s3.uri}}
         </span>
         {{#if isImage asset.type}}
-            <img class="asset-image" src="{{asset.uri}}"/>
+            <img class="asset-image" src="{{asset.s3.uri}}"/>
         {{else}}
             {{#if isVideo asset.type}}
                 <video class="asset-video" width="100" controls="">
-                    <source type="{{asset.type}}" src="{{asset.uri}}">
+                    <source type="{{asset.type}}" src="{{asset.s3.uri}}">
                 </video>
             {{else}}
                 {{#if isAudio asset.type}}
                     <audio class="asset-audio">
-                        <source type={{asset.type}} src="{{asset.uri}}">
+                        <source type={{asset.type}} src="{{asset.s3.uri}}">
                     </audio>
                 {{/if}}
             {{/if}}

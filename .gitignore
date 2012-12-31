@@ -1,3 +1,5 @@
 .DS_Store
 .idea
 public/assets*
+public/node_modules/*
+aws.json

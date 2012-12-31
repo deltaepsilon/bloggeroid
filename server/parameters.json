@@ -1,0 +1,12 @@
+{
+	"aws": {
+		"s3": {
+			"uri": "http://assets.christopheresplin.com/",
+			"bucketName": "assets.christopheresplin.com",
+			"path": "meteor/blog/assets/",
+			"cacheControl": "max-age=31536000",
+			"storageClass": "REDUCED_REDUNDANCY",
+			"acl": "public-read"
+		}
+	}
+}

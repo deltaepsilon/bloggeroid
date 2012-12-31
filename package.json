@@ -1,0 +1,13 @@
+{
+	"name": "Blogggeroid",
+	"version": "0.0.1",
+	"engines": {
+		"node": "0.6.x"
+	},
+	"dependencies": {
+		"aws-sdk": "0.9.1-pre.2"
+	},
+	"scripts": {
+
+	}
+}

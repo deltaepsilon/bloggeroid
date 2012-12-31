@@ -16,8 +16,6 @@ Template.assetDescription.events(
     Meteor.call 'removeAsset', id, (error) ->
       if error
         console.warn 'error: ', error
-      else
-        Assets.remove(id)
 )
 
 Template.assetUpload.events(
@@ -49,7 +47,7 @@ class AssetUpload
     reader = new FileReader()
     reader.onload = (e) =>
       @sendToServer file, reader
-    reader.readAsDataURL file
+    reader.readAsBinaryString file
 
   sendToServer: (file, reader) ->
     Meteor.call 'createAsset', reader.result, file.name, file.size, file.type
