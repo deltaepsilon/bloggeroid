@@ -129,8 +129,6 @@ Meteor.methods(
 
     aws = loadAWS()
     s3 = new aws.S3()
-    s3.client.listBuckets (error, data) ->
-      console.log 'buckets: ', data
     params = getParams()
 
 
@@ -147,11 +145,12 @@ Meteor.methods(
 
 
 #        s3 delete does not work right now.  AWS-SDK is throwing nasty errors
-    console.log
+    console.warn 's3 delete does not work right now.  Meteor cannot stringify the AWS-SDK payload.'
       Bucket: params.aws.s3.bucketName
       Key: asset.s3.key
-    s3.client.deleteObject
-      Bucket: params.aws.s3.bucketName
-      Key: asset.s3.key
-    , callback
+#    s3.client.deleteObject
+#      Bucket: params.aws.s3.bucketName
+#      Key: asset.s3.key
+#    , callback
+    callback()
 )
